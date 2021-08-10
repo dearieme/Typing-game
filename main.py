@@ -17,35 +17,38 @@ def getLine():
     lines = readLines("thingsToType.txt")
     lines = list(filter(isNewLine, lines))
     line = lines[random.randint(0, len(lines)-1)]
+    if line[-1] == "\n":
+        line = line[:-1]
     return line
 
 def calcPercent(userPhrase, correctPhrase):
-    return 100
+    if len(userPhrase) > len(correctPhrase):
+        length = len(correctPhrase)
+    else:
+        length = len(userPhrase)
+    total = 0
 
-def calcWPM(chars, time):
-    return 100
+    for i in range (length):
+        if userPhrase[i] == correctPhrase[i]:
+            total += 1
+    return (total/len(correctPhrase))*100
 
+def calcWPM(chars, timeTaken):
+    mins = timeTaken/60
+    words = chars/5
+    return words/mins
+    
 lineToType = getLine()
+print("The phrase is '" + lineToType + "'")
+time.sleep(3)
 startTime = time.time()
-userString = input(lineToType + "\n")
+userString = input("Go!\n")
 endTime = time.time()
 
-print("TimeTaken: " + str(endTime - startTime) + " seconds")
-print("Percentage Correct:" + str(calcPercent("","")) + "%")
-print("WPM: " + str(calcWPM("","")))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+print("Time Taken: " + str(round(endTime - startTime, 2)) + " seconds")
+print("Percentage Correct:" + str(round(calcPercent(userString, lineToType), 1)) + "%")
+print("WPM: " + str(round(calcWPM(len(userString),endTime-startTime), 2)))
+if calcPercent(userString, lineToType) < 95:
+    print("Fail")
+else:
+    print("Acceptable Accuracy")
