@@ -21,17 +21,22 @@ def getLine():
         line = line[:-1]
     return line
 
-def calcPercent(userPhrase, correctPhrase):
-    if len(userPhrase) > len(correctPhrase):
-        length = len(correctPhrase)
-    else:
-        length = len(userPhrase)
-    total = 0
+def getWords(inputSting):
+    wordList = inputSting.split()
+    return wordList
 
-    for i in range (length):
-        if userPhrase[i] == correctPhrase[i]:
+def calcPercent(userPhrase, correctPhrase):
+    userWords = getWords(userPhrase)
+    correctWords = getWords(correctPhrase)
+
+    total = 0
+    tempCorrectWords = correctWords.copy()
+    for word in userWords:
+        if word in tempCorrectWords:
+            tempCorrectWords.remove(word)
             total += 1
-    return (total/len(correctPhrase))*100
+    percentRight = (total/len(correctWords)) * 100
+    return percentRight
 
 def calcWPM(chars, timeTaken):
     mins = timeTaken/60
