@@ -45,10 +45,19 @@ startTime = time.time()
 userString = input("Go!\n")
 endTime = time.time()
 
+percentCorrect = calcPercent(userString, lineToType)
 print("Time Taken: " + str(round(endTime - startTime, 2)) + " seconds")
-print("Percentage Correct:" + str(round(calcPercent(userString, lineToType), 1)) + "%")
+print("Percentage Correct:" + str(round(percentCorrect, 1)) + "%")
 print("WPM: " + str(round(calcWPM(len(userString),endTime-startTime), 2)))
-if calcPercent(userString, lineToType) < 95:
+if percentCorrect == 100:
+    print("Perfect")
+elif percentCorrect == 0:
     print("Fail")
+elif percentCorrect < 50:
+    print("Very inacurate")
+elif percentCorrect < 75:
+    print("Moderately accurate")
+elif percentCorrect < 100:
+    print("Mostly accurate")
 else:
-    print("Acceptable Accuracy")
+    print("Error in accuracy description section: percentCorrect = " + str(percentCorrect))
