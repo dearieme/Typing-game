@@ -38,18 +38,25 @@ def calcWPM(chars, timeTaken):
     words = chars/5
     return words/mins
     
-lineToType = getLine()
-print("The phrase is '" + lineToType + "'")
-time.sleep(3)
-startTime = time.time()
-print("Go!")
-userString = input(lineToType + "\n")
-endTime = time.time()
+def giveUserLine(lineToType):
+    print("The phrase is '" + lineToType + "'")
+    time.sleep(3)
+    startTime = time.time()
+    print("Go!")
+    userString = input(lineToType + "\n")
+    endTime = time.time()
+    timeTaken = endTime - startTime
+    return userString, timeTaken
 
+lineToType = getLine()
+userString, timeTaken = giveUserLine(lineToType)
 percentCorrect = calcPercent(userString, lineToType)
-print("Time Taken: " + str(round(endTime - startTime, 2)) + " seconds")
+wpm = calcWPM(len(userString), timeTaken)
+
+print("Time Taken: " + str(round(timeTaken, 2)) + " seconds")
 print("Percentage Correct:" + str(round(percentCorrect, 1)) + "%")
-print("WPM: " + str(round(calcWPM(len(userString),endTime-startTime), 2)))
+print("WPM: " + str(round(wpm, 2)))
+
 if percentCorrect == 100:
     print("Perfect")
 elif percentCorrect == 0:
