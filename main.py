@@ -48,9 +48,8 @@ def calcWPM(chars, timeTaken):
     
 def giveUserLine(lineToType):
     print("The phrase is '" + lineToType + "'")
-    time.sleep(3)
+    input("Press enter to start")
     startTime = time.time()
-    print("Go!")
     userString = input(lineToType + "\n")
     endTime = time.time()
     timeTaken = endTime - startTime
