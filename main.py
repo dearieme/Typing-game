@@ -1,8 +1,11 @@
 import time
 import random
+import os
 
 def readLines(fileName):
-    f = open(fileName, "r")
+    fileDir = os.path.dirname(__file__)
+    fullPath = os.path.join(fileDir, fileName)
+    f = open(fullPath, "r")
     lines = f.readlines()
     f.close()
     return lines
