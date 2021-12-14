@@ -84,6 +84,8 @@ def giveUserLine(lineToType):
     return userString, timeTaken
 
 def main():
+    config = loadConfig('config.txt')
+
     lineToType = getLine()
     userString, timeTaken = giveUserLine(lineToType)
     percentCorrect = calcPercent(userString, lineToType)
@@ -105,6 +107,27 @@ def main():
         print("Mostly accurate")
     else:
         print("Error in accuracy description section: percentCorrect = " + str(percentCorrect))
+
+    if config['inTerminal'] != True:
+        time.sleep(5)
+
+def loadConfig(name):
+    configFile = name
+    with open(configFile, 'r') as f:
+        inTerminal = f.readline().split('=')[1][:-1]
+
+
+    if inTerminal == 'True':
+        isInTerminal = True
+    else:
+        isInTerminal = False
+
+    dict = {
+        'inTerminal': isInTerminal
+            }
+
+    return dict
+
 
 if __name__ == "__main__":
     main()

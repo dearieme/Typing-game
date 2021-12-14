@@ -1,0 +1,1 @@
+inTerminal=True
